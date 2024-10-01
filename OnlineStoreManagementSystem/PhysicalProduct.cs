@@ -1,6 +1,6 @@
 namespace OnlineStoreManagementSystem;
 
-public class PhysicalProduct : Product
+public class PhysicalProduct : Product, ISalesManageable
 {
     public override string Name { get; set; } = string.Empty;
 
@@ -14,5 +14,21 @@ public class PhysicalProduct : Product
                $"Name: {Name}\n" +
                $"Price: {Price}\n" +
                $"AvailableStock: {AvailableStock}";
+    }
+
+    public void AddQuantity(uint amount)
+    {
+        AvailableStock += amount;
+    }
+
+    public bool RemoveQuantity(uint amount)
+    {
+        if (amount > AvailableStock)
+        {
+            return false;
+        }
+        
+        AvailableStock -= amount;
+        return true;
     }
 }
