@@ -19,6 +19,11 @@ public static class ServiceExtensions
                 // opt.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
             });
     }
+    
+    public static void AddAutoMapper(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddAutoMapper();
+    }
 
     public static void AddDbContext(this WebApplicationBuilder builder)
     {
@@ -33,6 +38,11 @@ public static class ServiceExtensions
             opt.EnableThreadSafetyChecks();
             opt.EnableDetailedErrors();
         });
+    }
+    
+    public static void AddLogging(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddLogging(config => config.AddConsole());
     }
     
     public static void AddSwagger(this WebApplicationBuilder builder)

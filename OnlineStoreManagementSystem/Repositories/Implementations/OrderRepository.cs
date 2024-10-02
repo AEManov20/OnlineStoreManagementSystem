@@ -11,7 +11,8 @@ namespace OnlineStoreManagementSystem.Repositories.Implementations;
 
 internal class OrderRepository(
     DbContext context,
-    IMapper mapper)
+    IMapper mapper,
+    ILogger logger)
     : BaseCrudService<Order, OrderVM, OrderAdminIM, OrderUM>(context,
             mapper),
         IOrderRepository
@@ -74,7 +75,10 @@ internal class OrderRepository(
         if (physicalProduct != null)
         {
             if (physicalProduct.AvailableQuantity < quantity)
+            {
+                logger.LogInformation($"Product {physicalProduct.Id} has insufficient quantity ({physicalProduct.AvailableQuantity}).");
                 throw new ArgumentException("Not enough quantity available");
+            }
             
             var productOrder = await DbContext.Set<PhysicalProductOrder>()
                 .AddAsync(
@@ -90,7 +94,11 @@ internal class OrderRepository(
             DbContext.Entry(physicalProduct)
                 .State = EntityState.Modified;
 
-            // TODO: Whenever the quantity reaches zero, send some event
+            if (physicalProduct.AvailableQuantity == 0)
+            {
+                logger.LogInformation($"Supply for product {physicalProduct.Id} has run out.");
+            }
+            
             return
             [
                 new ProductOrderVM
