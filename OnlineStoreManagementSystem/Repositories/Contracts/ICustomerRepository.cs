@@ -6,4 +6,4 @@ namespace OnlineStoreManagementSystem.Repositories.Contracts;
 public interface ICustomerRepository : 
     IGenericCrudRepository<CustomerVM, CustomerIM, CustomerUM>,
     IGenericCollectionRepository<CustomerVM>;
-    
+ 
