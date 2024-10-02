@@ -13,7 +13,7 @@ public class Order : IEntity
     
     [Required] public decimal DiscountPercentage { get; set; }
     
-    // prevents from updating the order if this is true
+    // NOTE: this field prevents from updating the order if this is true
     [Required] public bool IsProcessed { get; set; } = false;
 
     [Required]

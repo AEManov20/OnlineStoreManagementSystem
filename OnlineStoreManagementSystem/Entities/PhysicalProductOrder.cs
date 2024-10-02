@@ -10,6 +10,8 @@ public class PhysicalProductOrder : IProductOrder
     [Required] public Guid OrderId { get; set; }
 
     [Required] public Guid ProductId { get; set; }
+    
+    [Required] public uint Quantity { get; set; }
 
     [Required]
     [ForeignKey(nameof(OrderId))]

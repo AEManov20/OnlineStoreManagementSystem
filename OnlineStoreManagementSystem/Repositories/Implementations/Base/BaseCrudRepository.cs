@@ -77,7 +77,7 @@ internal class BaseCrudService<TBaseEntity, TEntityVM, TEntityIM, TEntityUM>
         return await Entities.Where(e => e.Id == id).ExecuteDeleteAsync(cf);
     }
     
-    protected IQueryable<TBaseEntity> GetAllPaginatedQueryable(PaginationOptions pagination,
+    protected static IQueryable<TBaseEntity> GetAllPaginatedQueryable(PaginationOptions pagination,
         IQueryable<TBaseEntity> queryable)
     {
         if (pagination.SortByColumn != null)

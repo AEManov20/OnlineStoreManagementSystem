@@ -10,7 +10,7 @@ public class DiscountCode : IEntity
 
     [MaxLength(100)] public string CodeValue { get; set; } = string.Empty;
     
-    [Required] decimal DiscountPercentage { get; set; }
+    [Required] public decimal DiscountPercentage { get; set; }
     
     [Required] public DateTime ExpirationDate { get; set; }
 }
