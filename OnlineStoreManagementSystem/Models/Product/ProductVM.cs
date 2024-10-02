@@ -8,5 +8,5 @@ public class ProductVM
     
     public decimal Price { get; set; }
     
-    public uint AvailableQuantity { get; set; } 
+    public uint? AvailableQuantity { get; set; } 
 }
