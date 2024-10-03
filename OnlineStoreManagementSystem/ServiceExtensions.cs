@@ -29,8 +29,7 @@ public static class ServiceExtensions
     {
         builder.Services.AddDbContext<ApplicationDbContext>(opt =>
         {
-            // opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")!);
-            opt.UseInMemoryDatabase("OnlineStoreManagementSystem");
+            opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
             if (builder.Environment.IsDevelopment())
                 opt.EnableSensitiveDataLogging();
@@ -38,6 +37,7 @@ public static class ServiceExtensions
             opt.EnableThreadSafetyChecks();
             opt.EnableDetailedErrors();
         });
+        builder.Services.AddScoped<DbContext, ApplicationDbContext>();
     }
     
     public static void AddLogging(this WebApplicationBuilder builder)
